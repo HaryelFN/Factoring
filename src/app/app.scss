@@ -1,6 +1,4 @@
 // http://ionicframework.com/docs/theming/
-
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,3 +12,133 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+// https://coolors.co/f6511d-ffb400-00a6ed-7fb800-0d2c54
+//
+// Default Colors
+// $SIDEMENU_TOP: #0097a7;
+// $SIDEMENU_BOTTOM: #0097a7;
+// $FONT_COLOR: #FAFAFA;
+// Red Colors
+// $SIDEMENU_TOP: #A51C30;
+// $SIDEMENU_BOTTOM: #C52233;
+// $SIDEMENU_TOP: #006494;
+// $SIDEMENU_BOTTOM: #247BA0;
+$SIDEMENU_TOP: #0D6BB9;
+$SIDEMENU_BOTTOM: #2A91D6;
+$FONT_COLOR: #EDF2F4;
+
+.toolbar-background-md,
+.toolbar-background-ios,
+.tabs-md .tabbar,
+.tabs-ios .tabbar {
+  background: -webkit-gradient(left top, $SIDEMENU_TOP, $SIDEMENU_BOTTOM);
+  background: -o-linear-gradient(bottom right, $SIDEMENU_TOP, $SIDEMENU_BOTTOM);
+  background: -moz-linear-gradient(bottom right, $SIDEMENU_TOP, $SIDEMENU_BOTTOM);
+  background: linear-gradient(to bottom right, $SIDEMENU_TOP, $SIDEMENU_BOTTOM);
+  background-repeat: repeat-x;
+}
+
+.toolbar-title,
+.tabs-md .tab-button,
+.tabs-ios .tab-button,
+.tab-button-text {
+  color: $FONT_COLOR;
+}
+
+.bar-button,
+.tabs-md .bar-button:hover {
+  color: $FONT_COLOR;
+}
+
+.tabs-md .tab-button[aria-selected=true] .tab-button-icon,
+.tabs-ios .tab-button[aria-selected=true] .tab-button-icon,
+.tabs-md .tab-button-icon,
+.tabs-ios .tab-button-icon {
+  color: $FONT_COLOR;
+}
+
+.content {
+  background-color: #E9E9E9;
+}
+
+.menu-inner .content,
+.menu-principal .item {
+  background-color: rgb(255, 255, 255);
+}
+
+.card {
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.menu-principal .item span {
+  margin-left: 10px;
+  padding-top: 10px;
+}
+
+.bar-button-default-md:hover:not(.disable-hover),
+.bar-button-clear-md-default:hover:not(.disable-hover),
+.bar-button-md-default:hover:not(.disable-hover) {
+  color: $FONT_COLOR;
+}
+
+.bar-button-default-ios:hover:not(.disable-hover),
+.bar-button-default.bar-button-ios-default:hover:not(.disable-hover),
+.bar-button-clear-ios-default:hover:not(.disable-hover) {
+  color: $FONT_COLOR;
+}
+
+.title.title-md {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  z-index: -1;
+}
+
+.app-icons {
+  width: 40px;
+  height: 40px;
+}
+
+.list-md .item-block .item-inner {
+  border-bottom: 1px solid #dedede !important;
+}
+
+.menu-bottom {
+  left: 0;
+  right: 0;
+  margin: 0;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+.sub-menu .label-md {
+  margin-top: 10px!important;
+  margin-right: 10px!important;
+  margin-left: 10px!important;
+  font-size: 1.3rem !important;
+}
+
+.sub-menu .label-md img {
+  margin-top: 5px!important;
+}
+
+.sub-menu img {
+  width: 20px;
+  height: 20px
+}
+
+.list-md {
+  margin: 0px!important;
+}
+
+.error{
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}

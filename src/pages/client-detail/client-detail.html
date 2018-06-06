@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Detalhes Cliente</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid>
+    <ion-row offset-md-3>
+      <ion-col col-md-8>
+
+        <ion-card>
+          <ion-card-content>
+            <form [formGroup]="clientForm" (ngSubmit)="update()" id="clientForm">
+              <ion-grid>
+                <ion-row>
+                  <ion-col col-md-6 col-12>
+                    <ion-list>
+
+                      <ion-item>
+                        <ion-label floating>CPF*</ion-label>
+                        <ion-input type="text" formControlName="cpf"></ion-input>
+                      </ion-item>
+
+                      <ion-item>
+                        <ion-label floating>Nome*</ion-label>
+                        <ion-input type="text" formControlName="nome"></ion-input>
+                      </ion-item>
+
+                      <ion-item>
+                        <ion-label floating>Telefone</ion-label>
+                        <ion-input type="text" formControlName="telefone"></ion-input>
+                      </ion-item>
+
+                    </ion-list>
+                  </ion-col>
+
+                  <ion-col col-md-6 col-12>
+                    <ion-list>
+
+                      <ion-item>
+                        <ion-label floating>E-mail</ion-label>
+                        <ion-input type="text" formControlName="email"></ion-input>
+                      </ion-item>
+
+                      <ion-item>
+                        <ion-label floating>Endereço</ion-label>
+                        <ion-input type="text" formControlName="endereco"></ion-input>
+                      </ion-item>
+
+
+                      <ion-item>
+                        <ion-label floating>Observação</ion-label>
+                        <ion-input type="text" formControlName="obs"></ion-input>
+                      </ion-item>
+
+                    </ion-list>
+                  </ion-col>
+
+                </ion-row>
+              </ion-grid>
+            </form>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col col-md-3>
+              <button ion-button color="danger" round (click)="remove()">Excluir</button>
+            </ion-col>
+
+            <ion-col col-md-3>
+            </ion-col>
+
+            <ion-col col-md-3>
+            </ion-col>
+
+            <ion-col col-md-3>
+              <button ion-button color="success" round type="submit" [disabled]="!clientForm.valid" form="clientForm">Atualizar</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+</ion-content>

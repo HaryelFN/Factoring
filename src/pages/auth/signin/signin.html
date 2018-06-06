@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row offset-md-4>
+      <ion-col col-md-6>
+
+        <h1 text-center>
+          <ion-icon class="auth-icon" name="ios-lock-outline" color="primary"></ion-icon>
+        </h1>
+
+        <form [formGroup]="signinForm" (ngSubmit)="signInWithEmailAndPass(); $event.preventDefault()">
+
+          <ion-item>
+            <ion-icon name="mail" item-start color="primary"></ion-icon>
+            <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="lock" item-start color="primary"></ion-icon>
+            <ion-input type="password" placeholder="Senha" formControlName="password"></ion-input>
+          </ion-item>
+
+          <br>
+          <button ion-button full type="submit" [disabled]="signinForm.invalid">Entrar</button>
+
+          <br>
+          <ion-row>
+            <ion-col>
+              <button ion-button full color="danger" onclick="signInWithGoogle()">Google</button>
+            </ion-col>
+            <ion-col>
+              <button ion-button full onclick="signInWithFacebook()">Facebook</button>
+            </ion-col>
+          </ion-row>
+
+        </form>
+
+        <button ion-button outline textx-center (click)="openPage('SignupPage')">Cadastrar</button>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

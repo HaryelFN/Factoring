@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      Clientes
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row offset-md-3>
+      <ion-col col-md-8>
+
+        <ion-card>
+          <ion-card-content>
+            <div padding>
+              <ion-segment [(ngModel)]="segment">
+                <ion-segment-button value="list">
+                  Lista
+                </ion-segment-button>
+                <ion-segment-button value="add">
+                  Adicionar
+                </ion-segment-button>
+              </ion-segment>
+            </div>
+
+            <div [ngSwitch]="segment">
+              <ion-list *ngSwitchCase="'list'">
+                <ion-item *ngFor="let c of clients$ | async">
+                  <button color="default" item-end ion-button (click)="detailClient(c)">
+                    <ion-icon name="ios-play-outline"></ion-icon>
+                  </button>
+                  <p>CPF: {{ c.cpf }}</p>
+                  <p>Nome: {{c.nome }}</p>
+                </ion-item>
+
+              </ion-list>
+
+              <ion-list *ngSwitchCase="'add'">
+                <form [formGroup]="clientForm" (ngSubmit)="add()" id="clientForm">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col col-md-6 col-12>
+                        <ion-list>
+
+                          <ion-item>
+                            <ion-label floating>CPF*</ion-label>
+                            <ion-input type="text" formControlName="cpf" [brmasker]="{person: true}"></ion-input>
+                          </ion-item>
+
+                          <ion-item>
+                            <ion-label floating>Nome*</ion-label>
+                            <ion-input type="text" formControlName="nome"></ion-input>
+                          </ion-item>
+
+                          <ion-item>
+                            <ion-label floating>Telefone</ion-label>
+                            <ion-input type="text" formControlName="telefone"></ion-input>
+                          </ion-item>
+
+                        </ion-list>
+
+                      </ion-col>
+
+                      <ion-col col-md-6 col-12>
+                        <ion-list>
+
+
+                          <ion-item>
+                            <ion-label floating>E-mail</ion-label>
+                            <ion-input type="text" formControlName="email"></ion-input>
+                          </ion-item>
+
+                          <ion-item>
+                            <ion-label floating>Endereço</ion-label>
+                            <ion-input type="text" formControlName="endereco"></ion-input>
+                          </ion-item>
+
+
+                          <ion-item>
+                            <ion-label floating>Observação</ion-label>
+                            <ion-input type="text" formControlName="obs"></ion-input>
+                          </ion-item>
+
+                        </ion-list>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+
+                </form>
+
+              </ion-list>
+            </div>
+
+
+
+          </ion-card-content>
+        </ion-card>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col col-md-3>
+            </ion-col>
+            <ion-col col-md-3>
+
+            </ion-col>
+            <ion-col col-md-3>
+
+            </ion-col>
+            <ion-col col-md-3 col-12>
+              <button ion-button full color="success" round type="submit" [hidden]="hideButton()" [disabled]="!clientForm.valid" form="clientForm">Salvar</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+</ion-content>

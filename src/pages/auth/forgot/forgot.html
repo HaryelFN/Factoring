@@ -1,0 +1,55 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      Minha Saúde
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-grid>
+    <ion-row offset-md-4>
+      <ion-col col-md-6>
+        <ion-card>
+          <ion-card-header>
+            <h1>Resetar Senha</h1>
+          </ion-card-header>
+
+          <ion-card-content>
+
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <h3 text-center padding></h3>
+                  <form [formGroup]="user" (ngSubmit)="resetPassword()">
+                    <ion-list>
+
+                      <ion-item>
+                        <ion-label floating>Email</ion-label>
+                        <ion-input type="text" formControlName="email"></ion-input>
+                      </ion-item>
+
+                    </ion-list>
+
+                    <button ion-button full round color="dark" type="submit" [disabled]="!user.valid">Enviar</button>
+                  </form>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

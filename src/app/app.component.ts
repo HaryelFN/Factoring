@@ -3,42 +3,136 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { GlobalService } from './../providers/global/global.service';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Observable } from 'rxjs/Observable';
+import { UserService } from './../providers/user.service';
+import { User } from './../models/user.model';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
+  rootPage: any;
+  pages: Array<{ title: string, component: any, image: string }>;
+  isAuthenticated: boolean = false;
+  typeUser: string;
 
-  rootPage: any = HomePage;
+  user: User;
 
-  pages: Array<{title: string, component: any}>;
+  constructor(
+    public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    private afAuth: AngularFireAuth,
+    private global: GlobalService,
+    private userService: UserService) {
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-    this.initializeApp();
+    platform.ready().then(() => {
+      this.init();
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
-    ];
+      afAuth.authState.subscribe(user => {
+        if (user) {
 
-  }
+          this.global.setCurrentUser(user);
+          this.isAuthenticated = true;
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+          this.userService.getUserByUid(user.uid).subscribe(s => {
+            this.menu(this.isAuthenticated, s.tipo);
+            this.global.setTypeUser(s.tipo);
+
+            this.global.getTypeUser().then((tipo => {
+              if (tipo == 'pro') {
+                this.openPage('DashBordPage');
+              } else {
+                this.openPage('CalcPage');
+              }
+            }));
+
+          }, error => {
+            this.global.setCurrentUser('');
+            this.isAuthenticated = false;
+            this.menu(this.isAuthenticated, '');
+            this.openPage('HomePage');
+          });
+
+          //findUser.unsubscribe();
+
+        } else {
+          this.global.setCurrentUser('');
+          this.isAuthenticated = false;
+          this.menu(this.isAuthenticated, '');
+          this.openPage('HomePage');
+        }
+      });
+
+      statusBar.styleDefault();
+      splashScreen.hide();
     });
   }
 
+  init() {
+    this.global.getCurrentUser().then((user) => {
+      if (user != '') {
+        this.global.getTypeUser().then((tipo => {
+          if (tipo == 'pro') {
+            this.openPage('DashBordPage');
+          } else {
+            this.openPage('CalcPage');
+          }
+        }));
+      } else {
+        this.openPage('HomePage');
+      }
+    });
+  }
+
+  menu(isAuthenticated, tipoUsuario) {
+    if (isAuthenticated && tipoUsuario == "pro") {
+      this.pages = [
+        { title: 'DashBord', component: 'DashBordPage', image: './assets/icon/menu/chart.png' },
+        { title: 'Calculadora', component: 'CalcPage', image: './assets/icon/menu/calc.png' },
+        { title: 'Clientes', component: 'ClientsPage', image: './assets/icon/menu/clients.png' },
+        { title: 'Sobre', component: 'SobrePage', image: './assets/icon/menu/sobre.png' }
+      ];
+    } else if (isAuthenticated && tipoUsuario == "free") {
+      this.pages = [
+        { title: 'Calculadora', component: 'CalcPage', image: './assets/icon/menu/calc.png' },
+        { title: 'Clientes', component: 'ClientsPage', image: './assets/icon/menu/clients.png' },
+        { title: 'Sobre', component: 'SobrePage', image: './assets/icon/menu/sobre.png' }
+      ];
+    } else {
+      this.pages = [
+        { title: 'Início', component: 'HomePage', image: './assets/icon/menu/inicio.png' },
+        { title: 'Sobre', component: 'SobrePage', image: './assets/icon/menu/sobre.png' }
+      ];
+    }
+  }
+
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    let view = this.nav.getActive();
+    if (view == undefined) {
+      this.nav.setRoot(page);
+    } else {
+      if (view.component.name === page) { // Previnir que ela tente acessar a mesma view
+        return;
+      } else {
+        this.nav.setRoot(page);
+      }
+    }
+  }
+
+  openPageMenu(page) {
+    let view = this.nav.getActive();
+    if (view.component.name != page.component) { // Previnir que ela tente acessar a mesma view
+      this.nav.setRoot(page.component);
+    }
+  }
+
+  deslogar() {
+    this.afAuth.auth.signOut().then(() => {
+      this.global.setTypeUser('');
+    });
   }
 }

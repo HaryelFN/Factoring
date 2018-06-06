@@ -1,0 +1,117 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      Calculadora
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row offset-md-3>
+      <ion-col col-md-8>
+
+        <ion-card>
+
+          <ion-card-header>
+            <h2 text-justify>Cheques</h2>
+          </ion-card-header>
+
+          <ion-card-content>
+            <div padding>
+              <ion-segment [(ngModel)]="segment">
+                <ion-segment-button value="list">
+                  Lista
+                </ion-segment-button>
+                <ion-segment-button value="add">
+                  Adicionar
+                </ion-segment-button>
+              </ion-segment>
+            </div>
+
+            <div [ngSwitch]="segment">
+
+              <ion-list *ngSwitchCase="'list'">
+
+                <ion-item *ngFor="let c of cheques">
+                  <button color="default" item-end ion-button (click)="detailClient(c)">
+                    <ion-icon name="ios-play-outline"></ion-icon>
+                  </button>
+                  <p>Valor: {{ c.valor }}</p>
+                  <p>Data: {{c.data}}</p>
+                </ion-item>
+              </ion-list>
+
+              <ion-list *ngSwitchCase="'add'">
+                <form [formGroup]="chequeForm" (ngSubmit)="addCheque()" id="chequeForm">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col col-md-12 col-12>
+                        <ion-list>
+
+                          <ion-item>
+                            <ion-label>Cruzado</ion-label>
+                            <ion-toggle formControlName="cruzado"></ion-toggle>
+                          </ion-item>
+
+                          <ion-item>
+                            <ion-label floating>Valor*</ion-label>
+                            <ion-input type="text" formControlName="valor" [brmasker]="{money: true}"></ion-input>
+                          </ion-item>
+
+                          <ion-item>
+                            <ion-label floating>Data*</ion-label>
+                            <ion-datetime formControlName="bom_para" displayFormat="DD/MM/YYYY" pickerFormat="DD MMM YYYY" monthShortNames='Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro'
+                              doneText="Ok" cancelText="Cancelar"></ion-datetime>
+                          </ion-item>
+
+                        </ion-list>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </form>
+
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-md-3>
+                    </ion-col>
+                    <ion-col col-md-3>
+
+                    </ion-col>
+                    <ion-col col-md-3>
+
+                    </ion-col>
+                    <ion-col col-md-3 col-12>
+                      <button ion-button full color="success" round type="submit" [disabled]="!chequeForm.valid" form="chequeForm">Adicionar</button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-list>
+            </div>
+
+          </ion-card-content>
+        </ion-card>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col col-md-3>
+            </ion-col>
+            <ion-col col-md-3>
+
+            </ion-col>
+            <ion-col col-md-3>
+
+            </ion-col>
+            <ion-col col-md-3 col-12>
+              <button ion-button full color="success" round type="button" [hidden]="hideButton()" (click)="save()" >Salvar</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+</ion-content>

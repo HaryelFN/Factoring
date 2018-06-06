@@ -1,3 +1,45 @@
 page-home {
+  body,
+  html {
+    height: 100%;
+    margin: 0;
+    font: 400 15px/1.8 "Lato", sans-serif;
+  }
+  .content {
+    background-color: white;
+  }
+  .parallax {
+    max-width: 100%;
+    background-image: url("../assets/imgs/banner.jpg");
+    height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .main-0 {
+    color: white;
+    padding-top: 150px;
+  }
+  .main-0>h1 {
+    font-size: 4.8em;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+  }
+  .main-0>p {
+    font-size: 1.5em;
+  }
+  .main-1 {
+    color: #777;
+    background-color: white;
+    height: auto;
+    padding:10px;
+  }
+  
+  .borda_texto{
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #777;
+    font-size: 3em; color: #fffdd9;
+    }
 
-}
+  }

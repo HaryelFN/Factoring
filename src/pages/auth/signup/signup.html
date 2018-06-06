@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      Calc. Factoring
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row offset-md-3>
+      <ion-col col-md-8>
+        <ion-card>
+          <ion-card-header>
+            <h1>Cadastro</h1>
+          </ion-card-header>
+          <ion-card-content>
+
+            <div>
+              <ion-list>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-md-6 col-12>
+                      <form [formGroup]="form" (ngSubmit)="createUserWithEmailAndPass()">
+                        <ion-list>
+
+                          <ion-item>
+                            <ion-label floating>Email</ion-label>
+                            <ion-input type="text" formControlName="email"></ion-input>
+                          </ion-item>
+
+                          <ion-item>
+                            <ion-label floating>Senha</ion-label>
+                            <ion-input type="password" formControlName="password"></ion-input>
+                          </ion-item>
+
+                          <ion-item>
+                            <ion-label floating>Confirmar Senha</ion-label>
+                            <ion-input type="password" formControlName="password_confirm"></ion-input>
+                          </ion-item>
+
+                        </ion-list>
+
+                        <button ion-button full round color="dark" type="submit" [disabled]="!form.valid">Cadastrar</button>
+                      </form>
+                    </ion-col>
+                    <ion-col col-md-6 col-12>
+                      <h2 text-center padding>Ou cadastre-se com um click</h2>
+                      <button ion-button full round color="danger" (click)="signInWithGoogle()">Google+</button>
+                      <button ion-button full round color="facebook" (click)="signInWithFacebook()">Facebook</button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-list>
+            </div>
+
+            <ion-grid>
+              <ion-row>
+                <ion-col col-md-6>
+                  <button ion-button full outline small (click)="openPage('LoginPage')">Entrar</button>
+                </ion-col>
+                <ion-col col-md-6>
+                  <button ion-button full outline small color="secondary" (click)="openPage('ForgotPage')">Esqueci a senha</button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

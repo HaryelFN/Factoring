@@ -1,18 +1,70 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>
+      
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="openPage('SigninPage')">
+        Entrar
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+<ion-content>
+  <div class="parallax">
+    <div text-center class="main-0">
+      <h1 class="borda_texto">Calc. Factoring</h1>
+      <!--<p>Mantenha suas informações de emprestimos de maneira segura, e tenha acesso fácil e rápido em qualquer disposito móvel ou pela internet.</p>-->
+      <br>
+    </div>
+    <div text-center>
+      <button ion-button color="success" round class="comecar" (click)="openPage('SignupPage')">Começar Agora</button>
+    </div>
+  </div>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <div class="main-1">
+    <h1 text-center>A melhor maneira de gerenciar seus emprestimos.</h1>
+    <p text-center>
+      A plataforma que aumenta a velocidade no atendimento aos seus clientes, permitindo que voçe acompanhe todos seus emprestimos. vejas algumas da funcionalidades: 
+    </p>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12 col-md-3>
+          <div text-center>
+            <img name="fichaMedica" src="./assets/icon/menu/calc.png">
+            <h2>Calculadora</h2>
+            <p>Calcule cheques a serem descontados de maneira prática e rápida.</p>
+          </div>
+        </ion-col>  
+        <ion-col col-12 col-md-3>
+          <div text-center>
+            <img name="historico" src="./assets/icon/menu/clients.png">
+            <h2>Clientes</h2>
+            <p>Tenha em mãos todas as informações de seus clientes.</p>
+          </div>
+        </ion-col>
+        <ion-col col-12 col-md-3>
+          <div text-center>
+            <img name="medicos" src="./assets/icon/menu/notification.png">
+            <h2>Notificações</h2>
+            <p>Receba notificações de todos seus devedores nas datas pré estabelecidas.</p>
+          </div>
+        </ion-col>
+        <ion-col col-12 col-md-3>
+          <div text-center>
+            <img name="medicos" src="./assets/icon/menu/chart.png">
+            <h2>Relatórios</h2>
+            <p>Tenha controle de seus ganhos, geração de relatórios durante determinado periodo.</p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
 </ion-content>
